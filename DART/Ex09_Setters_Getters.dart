@@ -1,39 +1,30 @@
 void main() {
-  final mySquare = Square(side: 18);
-  
-  // Intentamos cambiar el valor del lado del cuadrado usando el setter
-  try {
-    mySquare.side = -32; // Esto debería generar un error debido a la validación del setter
-  } catch (e) {
-    print(e); // Se captura y muestra el mensaje de error
-  }
+  final mySquare = Square(side: 18); // Usamos 'side' en lugar de '_side'
 
-  print("""Lado del Cuadrado: ${mySquare.side}
+  print("""
+Lado del Cuadrado: ${mySquare.side}
 Área que ocupa: ${mySquare.calculateArea()}""");
+
+  mySquare.side = -32; // Intento de asignar valor negativo (causará excepción)
 }
 
 class Square {
-  double _side;
-
-  // Constructor que inicializa el lado del cuadrado
+  double _side; // Variable privada para almacenar el lado del cuadrado
   Square({required double side}) : _side = side;
 
-  // Getter que calcula y devuelve el área del cuadrado
-  double get area {
-    return _side * _side;
-  }
+  double get area => _side * _side; // Getter para el área (lado * lado)
 
-  // Setter que valida si el nuevo valor es positivo antes de asignarlo
+  // Getter para acceder al valor del lado
+  double get side => _side;
+
+  // Setter para modificar el valor del lado
   set side(double value) {
-    print("Asignando un valor al lado: $value");
-    if (value < 0) throw 'El valor del lado debe ser mayor a 0.'; // Lanza un error si el valor es negativo
+    print("Asignando un nuevo valor al lado: $value");
+    if (value < 0) throw 'El valor del lado debe ser mayor a 0.';
     _side = value;
   }
 
-  // Getter que permite obtener el valor actual del lado
-  double get side => _side;
-
-  // Método que calcula y retorna el área del cuadrado
+  // Método para calcular el área
   double calculateArea() {
     return _side * _side;
   }
