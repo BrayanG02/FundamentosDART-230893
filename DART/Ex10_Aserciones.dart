@@ -1,73 +1,42 @@
 void main() {
-   // Crear instancias de plantas de energía
-  final windPlant = WindPlant( initialEnergy: 100 ); 
-  final nuclearPlant = NuclearPlant( energyLeft: 1000 ); 
+  final mySquare = Square(side: 10); // Usamos 'side' en lugar de '_side'
+  print("""
+  Lado del Cuadrado: ${mySquare._side}
+  Área que ocupa: ${mySquare.calculateArea()}""");
+
+   mySquare.side=-5; // Usamos 'side' en lugar de '_side'
+  print("""
+  Lado del Cuadrado: ${mySquare._side}
+  Área que ocupa: ${mySquare.calculateArea()}""");
   
-  // Cargar el teléfono usando las plantas de energía y mostrar los resultados
-  print( 'wind: ${ chargePhone( windPlant ) }' );
-  print( 'nuclear: ${ chargePhone( nuclearPlant ) }' );
+  
+  final mySquare2 = Square(side: 10); // Usamos 'side' en lugar de '_side'
+  print("""
+  Lado del Cuadrado: ${mySquare2._side}
+  Área que ocupa: ${mySquare2.calculateArea()}""");
+
 }
 
-// Función para cargar el teléfono
-double chargePhone( EnergyPlant plant ) {
-   // Comprobar si hay suficiente energía
-  if ( plant.energyLeft < 10 ) {
-    // Lanzar excepción si no hay suficiente energía
-    throw Exception('Not enough energy');
+class Square {
+  double _side;
+
+  Square({required double side})
+      : assert(side >= 0, 'El valor del lado debe ser mayor a 0'),
+        _side = side;
+
+  double get area {
+    return _side * _side;
   }
-    
-  return plant.energyLeft - 10;
-}
 
-// Enumeración para definir tipos de plantas
-enum PlantType { nuclear, wind, water }
-
-// Clase abstracta que representa una planta de energía
-abstract class EnergyPlant {
-  
-  double energyLeft;
-  final PlantType type; // nuclear, wind, water
-  
-   // Constructor que inicializa la energía y el tipo
-  EnergyPlant({ 
-    required this.energyLeft, 
-    required this.type 
-  });
-  
-    // Método abstracto para consumir energía
-  void consumeEnergy( double amount );
-  
-}
-
-// Clase que representa una planta eólica
-class WindPlant extends EnergyPlant {
-  
-  WindPlant({ required double initialEnergy })
-      : super( energyLeft: initialEnergy, type: PlantType.wind );
-  
-    // Implementación del método para consumir energía
-  @override
-  void consumeEnergy( double amount ) {
-    energyLeft -= amount;
+  set side(double value) {
+    print('setting new value $value');
+    if (value < 0) throw 'Value must be >= 0';
+    _side = value;
   }
-}
 
-// Clase que representa una planta 
-class NuclearPlant implements EnergyPlant {
-  
-  @override
-  double energyLeft; // Energía disponible
-  
-  // Establecer el tipo como nuclear
-  @override
-  final PlantType type = PlantType.nuclear;
-  
-   // Constructor que inicializa la energía
-  NuclearPlant({ required this.energyLeft });
-  
-  // Implementación del método para consumir energía
-  @override
-  void consumeEnergy( double amount ) {
-    energyLeft -= (amount * 0.5);  // Consumir la mitad de la energía
+
+  // Método para calcular el área
+  double calculateArea() {
+    return _side * _side;
   }
 }
