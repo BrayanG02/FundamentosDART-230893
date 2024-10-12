@@ -1,190 +1,259 @@
 void main() {
-  // Caso 1: NUEVO PACIENTE QUE SE REGISTRA EL DIA DE HOY
-print("---------------------Caso 1-----------------------");
-print("Caso 1: NUEVO PACIENTE QUE SE REGISTRA EL DIA DE HOY");
-  final nuevoPaciente = Paciente(
-    id: 1,
-    nombre: "Brayan",
-    apellidoPaterno: "Gutierrez",
-    apellidoMaterno: "Ramirez",
-    genero: Genero.hombre,
-    grupoSanguineo: GrupoSanguineo.APositivo,
-    curp:"GURB020718HPLTMRA1",
-    fechaNacimiento: DateTime(1995, 5, 10),
-    estatusVida: EstatusVida.Vivo,
-    estadoMedico: "Estable",
-    nss: "1234567890",
-    tipoDeSeguro: "Seguro Social",
-    ultimaConsulta: DateTime.now(),  // Fecha actual
-    fechaRegistro: DateTime.now(),   // Fecha actual
-  );
-  print(nuevoPaciente);
- 
+    // Caso 1: NUEVO PACIENTE QUE SE REGISTRA EL DÍA DE HOY
+    print("---------------------Caso 1-----------------------");
+    print("Caso 1: NUEVO PACIENTE QUE SE REGISTRA EL DÍA DE HOY");
 
- print("\n-------------Caso 2---------------------------\n");
-  // Caso 2: DE UN PACIENTE NUEVO, QUE ALGUNA VEZ FUE TRABAJADOR DEL HOSPITAL
-  print("Caso 2: DE UN PACIENTE NUEVO, QUE ALGUNA VEZ FUE TRABAJADOR DEL HOSPITAL");
-  final pacienteTrabajador = Paciente(
-    id: 2,
-    nombre: "Ana Laura",
-    apellidoPaterno: "Ramirez",
-    apellidoMaterno:"Rivera"
-    genero: Genero.mujer,
-    grupoSanguineo: GrupoSanguineo.BNegativo,
-    curp: "GAMM020202MDFRRA09",
-    fechaNacimiento: DateTime(2002, 02, 02),
-    estatusVida: EstatusVida.Vivo,
-    estatusMedico: "ex-trabajadora",
-    nss: "98765432101",
-    tipoSeguro: TipoSeguro.ISSSTE,
-    fechaUltimaCita: DateTime.now(),
-    fechaRegistro: DateTime.now().subtract(Duration(days: 100)),
-  );
-  print(pacienteTrabajador);
+    final nuevoPaciente = Paciente(
+        id: 1,
+        nombre: "Brayan",
+        apellidoPaterno: "Gutierrez",
+        apellidoMaterno: "Ramirez",
+        genero: Genero.Hombre,
+        grupoSanguineo: GrupoSanguineo.APositivo,
+        curp: "GURB020718HPLTMRA1",
+        estatus: Estatus.Activo,
+        fechaNacimiento: DateTime(1995, 5, 10),
+        estatusVida: EstatusVida.Vivo,
+        estatusMedico: "Estable",
+        nss: "1234567890",
+        tipoSeguro: TipoSeguro.ISSSTE,
+        fechaUltimaCita: DateTime.now(),
+        fechaRegistro: DateTime.now(),
+    );
 
+    // Operaciones CRUD Caso 1
+    print("\n---Creando nuevo paciente---");
+    nuevoPaciente.crearPaciente(); // Crear
 
- print("\n-------------------Caso 3----------------------\n");
-  // Caso 3: PACIENTE QUE ACABA DE FALLECER
-  print("Caso 3: PACIENTE QUE ACABA DE FALLECER");
-  final pacienteFallecido = Paciente(
-    id: 3,
-    nombre: "Yung",
-    apellidoPaterno: "Ramirez",
-    apellidoMaterno:"Kawasaki"
-    genero: Genero.hombre,
-    grupoSanguineo: GrupoSanguineo.ONegativo,
-    curp: "SAFP990303HDFRNR02",
-    fechaNacimiento: DateTime(1999, 03, 03),
-    estatusVida: EstatusVida.Vivo,
-    estatusMedico: "crítico",
-    nss: "13579246801",
-    tipoSeguro: TipoSeguro.SeguroPopular,
-    fechaUltimaCita: DateTime.now(),
-    fechaRegistro: DateTime.now().subtract(Duration(days: 90)),
-  );
-  pacienteFallecido.registrarDefuncion();
-  print(pacienteFallecido);
+    print("\n---Mostrando datos del paciente---");
+    print(nuevoPaciente); // Mostrando datos con toString()
+
+    print("\n---Actualizando estatus médico del paciente---");
+    nuevoPaciente.actualizarPaciente("Estable con observación"); // Actualizar
+
+    print("\n---Eliminando CURP del paciente---");
+    nuevoPaciente.eliminarCurp(); // Eliminar CURP
+
+    print("\n---Mostrando datos del paciente tras la eliminación de CURP---");
+    print(nuevoPaciente); // Verificar la eliminación
+
+    // Caso 2: PACIENTE QUE HA TRABAJADO EN EL HOSPITAL ANTERIORMENTE
+    print("\n---------------------Caso 2-----------------------");
+    print("Caso 2: PACIENTE QUE HA TRABAJADO EN EL HOSPITAL ANTERIORMENTE");
+
+    final pacienteExTrabajador = Paciente(
+        id: 2,
+        nombre: "Maria",
+        apellidoPaterno: "Lopez",
+        apellidoMaterno: "Gomez",
+        genero: Genero.Mujer,
+        grupoSanguineo: GrupoSanguineo.OPositivo,
+        curp: "LOGM950303MPLGZR09",
+        estatus: Estatus.Suspendido,
+        fechaNacimiento: DateTime(1980, 8, 5),
+        estatusVida: EstatusVida.Vivo,
+        estatusMedico: "Ex-Empleada del Hospital",
+        nss: "0987654321",
+        tipoSeguro: TipoSeguro.IMSS,
+        fechaUltimaCita: DateTime(2024, 10, 1),
+        fechaRegistro: DateTime(2022, 3, 20),
+    );
+
+    // Operaciones CRUD Caso 2
+    print("\n---Mostrando datos del paciente ex-trabajador---");
+    print(pacienteExTrabajador);
+
+    // Caso 3: PACIENTE FALLECIDO QUE TRABAJABA EN EL HOSPITAL
+    print("\n---------------------Caso 3-----------------------");
+    print("Caso 3: PACIENTE FALLECIDO QUE TRABAJABA EN EL HOSPITAL");
+
+    final pacienteFallecido = Paciente(
+        id: 3,
+        nombre: "Juan",
+        apellidoPaterno: "Perez",
+        apellidoMaterno: "Martinez",
+        genero: Genero.Hombre,
+        grupoSanguineo: GrupoSanguineo.BNegativo,
+        curp: "PERJ840101HPLMRN04",
+        estatus: Estatus.Inactivo,
+        fechaNacimiento: DateTime(1984, 1, 1),
+        estatusVida: EstatusVida.Fallecido,
+        estatusMedico: "Fallecido por causas naturales",
+        nss: "1122334455",
+        tipoSeguro: TipoSeguro.SeguroPopular,
+        fechaUltimaCita: DateTime(2023, 12, 15),
+        fechaRegistro: DateTime(2020, 7, 10),
+    );
+
+    // Operaciones CRUD Caso 3
+    print("\n---Mostrando datos del paciente fallecido---");
+    print(pacienteFallecido);
+
+    print("\n---Eliminando NSS del paciente fallecido---");
+    pacienteFallecido.eliminarNSS();
+
+    print("\n---Mostrando datos del paciente tras eliminar NSS---");
+    print(pacienteFallecido);
 }
-
-// Definiciones de enumeraciones para estados de vida, tipos de seguro, grupos sanguíneos y géneros.
-enum EstatusVida { Vivo, Fallecido }
-enum TipoSeguro { IMSS, ISSSTE, SeguroPopular }
-enum GrupoSanguineo { OPositivo, ONegativo, APositivo, ANegativo, BPositivo, BNegativo }
-enum Genero { hombre, mujer, otro }
 
 abstract class Persona {
-  int id;
-  String nombre;
-  String apellidoPaterno;
-  String? apellidoMaterno;
-  String genero;
-  GrupoSanguineo grupoSanguineo;
-  String? curp;
-  DateTime fechaNacimiento;
-  bool estatus;
-  DateTime fechaRegistro;
-  DateTime? fechaActualizacion;
+    int id;
+    String nombre;
+    String apellidoPaterno;
+    String? apellidoMaterno;
+    Genero genero;
+    GrupoSanguineo grupoSanguineo;
+    String? curp;
+    DateTime fechaNacimiento;
+    Estatus estatus;
+    DateTime fechaRegistro;
+    DateTime? fechaActualizacion;
 
-  // Constructor para inicializar los atributos de una persona.
-  Persona({
-    required this.id,
-    required this.nombre,
-    required this.apellidoPaterno,
-    this.apellidoMaterno,
-    required this.genero,
-    required this.grupoSanguineo,
-    this.curp,
-    required this.fechaNacimiento,
-    this.estatus = true,
-    DateTime? fechaRegistro,
-    this.fechaActualizacion,
-  }) : fechaRegistro = fechaRegistro ?? DateTime.now();
+    Persona({
+        required this.id,
+        required this.nombre,
+        required this.apellidoPaterno,
+        this.apellidoMaterno,
+        required this.genero,
+        required this.grupoSanguineo,
+        this.curp,
+        required this.estatus,
+        required this.fechaNacimiento,
+        DateTime? fechaRegistro,
+        this.fechaActualizacion,
+    }) : fechaRegistro = fechaRegistro ?? DateTime.now();
 
-  @override
-  String toString() {
-    // Formatea la fecha de nacimiento y la fecha de registro para mostrarlas correctamente.
-    String formatFechaNacimiento = "${fechaNacimiento.day.toString().padLeft(2, '0')}/" +
-        "${fechaNacimiento.month.toString().padLeft(2, '0')}/${fechaNacimiento.year}";
-    String formatFechaRegistro = "${fechaRegistro.day.toString().padLeft(2, '0')}/" +
-        "${fechaRegistro.month.toString().padLeft(2, '0')}/${fechaRegistro.year} " +
-        "${fechaRegistro.hour.toString().padLeft(2, '0')}:" +
-        "${fechaRegistro.minute.toString().padLeft(2, '0')}:" +
-        "${fechaRegistro.second.toString().padLeft(2, '0')}";
+    void crearPaciente();
 
-    curp ??= "No registrado"; // Si la CURP no está registrada, se muestra "No registrado".
-    String status = estatus ? "Activo" : "Inactivo"; // Estatus de la persona.
+    void mostrarMensaje(String mensaje) {
+        print("Mensaje desde Persona: $mensaje");
+    }
 
-    // Retorna los datos en un formato legible.
-    return """
-      --------------------------------------------------------------
-      DATOS DE LA PERSONA
-      --------------------------------------------------------------
-      ID: $id,
-      Nombre: $nombre $apellidoPaterno ${apellidoMaterno ?? ""}
-      Género: ${genero.name}
-      Grupo Sanguíneo: ${grupoSanguineo.name}
-      Fecha de nacimiento: $formatFechaNacimiento
-      CURP: $curp
-      Estatus: $status
-      Fecha de registro: $formatFechaRegistro
-      --------------------------------------------------------------
-    """;
-  }
+    // Método para formatear fechas 
+    String formatDate(DateTime date) {
+        return "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}";
+    }
+
+    // Método que devuelve los datos de la persona en formato de texto.
+    @override
+    String toString() {
+        String formatFechaNacimiento =
+            "${fechaNacimiento.day.toString().padLeft(2, '0')}/" +
+            "${fechaNacimiento.month.toString().padLeft(2, '0')}/${fechaNacimiento.year}";
+
+        //uso del metodo de formatear fechas
+        String formattedFechaRegistro = formatDate(fechaRegistro);
+        String formattedFechaActualizacion = fechaActualizacion != null ? formatDate(fechaActualizacion!) : "Aún no a sido actualizado";
+       
+
+        return """
+               --------------------------------------------------------------
+               DATOS DE LA PERSONA
+               --------------------------------------------------------------
+               ID: $id,
+               Nombre: $nombre $apellidoPaterno ${apellidoMaterno ?? ""}
+               Género: ${genero.toString().split('.').last}
+               Grupo Sanguíneo: ${grupoSanguineo.toString().split('.').last}
+               Fecha de nacimiento: $formatFechaNacimiento
+               CURP: ${curp ?? 'No registrado'}
+               Estatus: ${estatus.toString().split('.').last}
+               Fecha de registro: $formattedFechaRegistro
+               Fecha de actualización: $formattedFechaActualizacion
+               --------------------------------------------------------------
+               """;
+    }
 }
 
-// Clase Paciente que extiende de Persona, añadiendo atributos específicos para un paciente.
 class Paciente extends Persona {
-  EstatusVida estatusVida; // Estado de vida del paciente (Vivo o Fallecido).
-  String estatusMedico; // Estatus médico actual del paciente.
-  String nss; // Número de seguro social del paciente.
-  TipoSeguro tipoSeguro; // Tipo de seguro médico.
-  DateTime fechaUltimaCita; // Fecha de la última cita médica.
+    EstatusVida estatusVida;
+    String estatusMedico;
+    String nss;
+    TipoSeguro tipoSeguro;
+    DateTime fechaUltimaCita;
 
-  // Constructor que inicializa un objeto Paciente.
-  Paciente({
-    required int id,
-    required String nombre,
-    required String apellidoPaterno,
-    String? apellidoMaterno,
-    required Genero genero,
-    required GrupoSanguineo grupoSanguineo,
-    String? curp,
-    required DateTime fechaNacimiento,
-    required this.estatusVida,
-    required this.estatusMedico,
-    required this.nss,
-    required this.tipoSeguro,
-    required this.fechaUltimaCita,
-    required DateTime fechaRegistro,
-  }) : super(
-            id: id,
-            nombre: nombre,
-            apellidoPaterno: apellidoPaterno,
-            apellidoMaterno: apellidoMaterno,
-            genero: genero,
-            grupoSanguineo: grupoSanguineo,
-            curp: curp,
-            fechaNacimiento: fechaNacimiento,
-            fechaRegistro: fechaRegistro);
+    Paciente({
+        required int id,
+        required String nombre,
+        required String apellidoPaterno,
+        String? apellidoMaterno,
+        required Genero genero,
+        required GrupoSanguineo grupoSanguineo,
+        String? curp,
+        required Estatus estatus,
+        required DateTime fechaNacimiento,
+        required this.estatusVida,
+        required this.estatusMedico,
+        required this.nss,
+        required this.tipoSeguro,
+        required this.fechaUltimaCita,
+        required DateTime fechaRegistro,
+    }) : super(
+        id: id,
+        nombre: nombre,
+        apellidoPaterno: apellidoPaterno,
+        apellidoMaterno: apellidoMaterno,
+        genero: genero,
+        grupoSanguineo: grupoSanguineo,
+        curp: curp,
+        estatus: estatus,
+        fechaNacimiento: fechaNacimiento,
+        fechaRegistro: fechaRegistro,
+    );
 
-  // Método que cambia el estatus de vida a "Fallecido" y registra la defunción.
-  void registrarDefuncion({required String motivo}) {
-    // Genera el mensaje personalizado con motivo y fecha.
-    final fechaDefuncion = DateTime.now();
-    estatusVida = EstatusVida.Fallecido; // Cambia el estado a Fallecido.
-    estatusMedico = "Fallecido $motivo. Fecha: $fechaDefuncion"; // Incluye motivo y fecha en el estatus.
-  }
+    // Método para crear un paciente
+    @override
+    void crearPaciente() {
+        print("Paciente $nombre $apellidoPaterno ha sido registrado exitosamente.");
+    }
 
-  // Sobrescribe el método toString para incluir los datos específicos del paciente.
-  @override
-  String toString() {
-    // Llama al método toString de la clase Persona y añade los datos específicos del paciente.
-    String output = super.toString();
-    output += "Estatus vida: $estatusMedico\n" +  // Estatus vida con motivo y fecha
-              "NSS: $nss\n" +
-              "Tipo de seguro: ${tipoSeguro.name}\n" +
-              "Fecha de última cita: ${fechaUltimaCita.day.toString().padLeft(2, '0')}/" +
-              "${fechaUltimaCita.month.toString().padLeft(2, '0')}/${fechaUltimaCita.year}\n";
-    return output;
-  }
+    // Método para actualizar el estatus médico del paciente
+    void actualizarPaciente(String nuevoEstatusMedico) {
+        this.estatusMedico = nuevoEstatusMedico;
+        this.fechaActualizacion = DateTime.now();
+        print(
+            "El estatus médico del paciente $nombre $apellidoPaterno ha sido actualizado a: $estatusMedico");
+    }
+
+    // Método para eliminar CURP del paciente
+    void eliminarCurp() {
+        this.curp = "Está persona no tiene CURP";
+        this.fechaActualizacion = DateTime.now();
+        print("El CURP del paciente $nombre $apellidoPaterno ha sido eliminado.");
+    }
+
+    // Método para registrar defunción del paciente
+    void registrarDefuncion({required String motivo}) {
+        this.estatusVida = EstatusVida.Fallecido;
+        this.estatusMedico = motivo;
+        this.fechaActualizacion = DateTime.now();
+        print("Se ha registrado la defunción del paciente $nombre $apellidoPaterno. Motivo: $motivo");
+    }
+
+    // Método para eliminar NSS del paciente
+    void eliminarNSS() {
+        this.nss = "Sin Número de Seguridad Social";
+        this.fechaActualizacion = DateTime.now();
+        print("El NSS del paciente $nombre $apellidoPaterno ha sido eliminado.");
+    }
+
+
+
+     // Sobreescribe el método toString para incluir información específica del paciente.
+    @override
+    String toString() {
+       String formattedFechaUltimaCita = formatDate(fechaUltimaCita); // Formatear fecha de última cita
+        String output = super.toString(); // Llama al método de la clase base.
+      output +="""Estatus vida: ${estatusVida.name}
+               Estatus médico: $estatusMedico
+               NSS: $nss
+               Tipo de seguro: ${tipoSeguro.name}
+               Fecha de última cita: $formattedFechaUltimaCita""";
+        return output; // Retorna la información completa del paciente.
+    }
 }
+
+enum Genero { Hombre, Mujer }
+enum GrupoSanguineo { APositivo, ANegativo, BPositivo, BNegativo, ABPositivo, ABNegativo, OPositivo, ONegativo }
+enum Estatus { Activo, Inactivo, Suspendido }
+enum EstatusVida { Vivo, Fallecido }
+enum TipoSeguro { IMSS, ISSSTE, SeguroPopular }
