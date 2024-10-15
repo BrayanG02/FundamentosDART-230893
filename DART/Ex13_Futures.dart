@@ -24,7 +24,7 @@ void main() {
 
 // Un método que demorará unos segundos en retornar su resultado.
 Future<String> httpGet(String url) {
- // El delayed hará que esperemos 4 segundos para devolvernos un mensaje.
+ // El delayed hará que esperemos 2 segundos para devolvernos un mensaje.
   return Future.delayed(const Duration(seconds: 2), () {
     // Se imprime un error en la petición.
     throw 'Error en la petición http';
