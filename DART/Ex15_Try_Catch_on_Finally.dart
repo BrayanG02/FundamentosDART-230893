@@ -30,8 +30,8 @@ void main() async {
 }
 
 Future<String> httpGet(String url) async {
-  // El delayed hará que esperemos 4 segundos para devolvernos un mensaje.
-  await Future.delayed(const Duration(seconds: 1));
+  // El delayed hará que esperemos 2 segundos para devolvernos un mensaje.
+  await Future.delayed(const Duration(seconds: 2));
   
   // Lanzar una excepción con el mensaje
   throw Exception('No hay parámetros en el URL');

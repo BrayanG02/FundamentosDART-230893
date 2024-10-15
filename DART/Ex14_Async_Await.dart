@@ -19,7 +19,7 @@ void main() async {
 }
 
 Future<String> httpGet(String url) async {
-  // El delayed hará que esperemos 4 segundos para devolvernos un mensaje.
+  // El delayed hará que esperemos 2 segundos para devolvernos un mensaje.
 /*   Entonces usamos el await para recibir el Future<string> y pedirle que el flujo se espere hasta recibir estos datos.
   Solo cuando reciba los datos el flujo normal continuará pero solo en esta función marcada con el async. */
   await Future.delayed(const Duration(seconds: 2));
