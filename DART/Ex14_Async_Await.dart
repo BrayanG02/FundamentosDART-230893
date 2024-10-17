@@ -24,5 +24,6 @@ Future<String> httpGet(String url) async {
   Solo cuando reciba los datos el flujo normal continuará pero solo en esta función marcada con el async. */
   await Future.delayed(const Duration(seconds: 2));
   // Lanzar una excepción para simular un error en la solicitud
-  throw 'Error en la petición';
+  //throw 'Error en la petición';
+  return 'Tenemos un valor de la petición';
 }

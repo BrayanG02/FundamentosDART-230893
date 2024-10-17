@@ -27,7 +27,7 @@ Future<String> httpGet(String url) {
  // El delayed hará que esperemos 2 segundos para devolvernos un mensaje.
   return Future.delayed(const Duration(seconds: 2), () {
     // Se imprime un error en la petición.
-    throw 'Error en la petición http';
-    // respuesta de la peticion
+   // throw 'Error en la petición http';
+    return 'Respuesta de la petición http';
   });
 }
